@@ -61,4 +61,40 @@ function createImagesDirectory() {
 document.addEventListener('DOMContentLoaded', () => {
     createImagesDirectory();
     createButtons();
+
+    // Initialize developer mode toggle
+    const devModeToggle = document.getElementById('devModeToggle');
+    const devButtons = document.querySelector('.dev-buttons');
+
+    console.log('Dev Mode Toggle element:', devModeToggle);
+    console.log('Dev Buttons element:', devButtons);
+
+    devModeToggle.addEventListener('change', (e) => {
+        console.log('Toggle changed:', e.target.checked);
+        if (e.target.checked) {
+            devButtons.style.display = 'flex';
+            console.log('Setting display to flex');
+        } else {
+            devButtons.style.display = 'none';
+            console.log('Setting display to none');
+        }
+        console.log('Current dev buttons display:', devButtons.style.display);
+    });
+
+    // Add click handlers for dev buttons
+    const settingsButton = document.getElementById('settingsButton');
+    const dataButton = document.getElementById('dataButton');
+
+    console.log('Settings button element:', settingsButton);
+    console.log('Data button element:', dataButton);
+
+    settingsButton.addEventListener('click', () => {
+        console.log('Settings button clicked');
+        // TODO: Implement settings functionality
+    });
+
+    dataButton.addEventListener('click', () => {
+        console.log('Data button clicked');
+        // TODO: Implement data functionality
+    });
 }); 
