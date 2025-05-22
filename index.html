@@ -13,6 +13,7 @@
             <!-- Buttons will be dynamically loaded here -->
         </div>
     </div>
+
     <div class="dev-mode-toggle">
         <label class="switch">
             <input type="checkbox" id="devModeToggle">
@@ -35,7 +36,27 @@
             </svg>
         </button>
     </div>
+    <div id="simpleDialogOverlay" class="simple-dialog-overlay"></div>
+    <div id="simpleDialog" class="simple-dialog">
+        <h2 id="simpleDialogTitle"></h2>
+        <form id="simpleDialogForm" class="simple-dialog-form">
+            <input type="text" id="editTitleInput" class="simple-dialog-input" placeholder="Edit title">
+            <button type="button" id="editImageButton" class="simple-dialog-button">Edit Image</button>
+            <input type="file" id="editImageInput" accept="image/*" style="display:none;">
+            <button type="submit" class="simple-dialog-button primary">Submit</button>
+        </form>
+    </div>
+    <div id="statsDialogOverlay" class="simple-dialog-overlay"></div>
+    <div id="statsDialog" class="simple-dialog">
+        <h2>Stats</h2>
+        <div style="margin-top: 24px;">
+            <h3 style="margin-bottom: 12px;">Daily Stats</h3>
+            <canvas id="statsBarChart" width="400" height="220"></canvas>
+        </div>
+    </div>
     <script src="buttons.js"></script>
-    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="stats_modal.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html> 
