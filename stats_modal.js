@@ -1,3 +1,4 @@
+import { getEmojiForWordApi } from './emoji_lookup.js';
 // Stats dialog and chart logic for AAC Device
 let statsChartInstance = null;
 
@@ -98,46 +99,8 @@ function hideUploadCsvDialog() {
     document.getElementById('uploadCsvOverlay').classList.remove('active');
 }
 
-// Emoji mapping for common items (expand as needed)
-const emojiMap = {
-    apple: '🍎',
-    banana: '🍌',
-    car: '🚗',
-    dog: '🐶',
-    cat: '🐱',
-    book: '📚',
-    phone: '📱',
-    food: '🍔',
-    drink: '🥤',
-    smile: '😊',
-    sun: '☀️',
-    star: '⭐',
-    heart: '❤️',
-    house: '🏠',
-    ball: '⚽',
-    music: '🎵',
-    tree: '🌳',
-    fire: '🔥',
-    water: '💧',
-    fish: '🐟',
-    bird: '🐦',
-    flower: '🌸',
-    bread: '🍞',
-    cheese: '🧀',
-    egg: '🥚',
-    milk: '🥛',
-    cookie: '🍪',
-    cake: '🍰',
-    // ... add more as needed
-};
-
-function getEmojiForWord(word) {
-    const key = word.trim().toLowerCase();
-    return emojiMap[key] || '🔲'; // fallback emoji
-}
-
 // CSV parsing and adding icons
-function handleCsvSubmit() {
+async function handleCsvSubmit() {
     console.log('Submit CSV button pressed');
     const csvFileInput = document.getElementById('csvFileInput');
     if (!csvFileInput.files || !csvFileInput.files[0]) {
@@ -146,25 +109,28 @@ function handleCsvSubmit() {
     }
     const file = csvFileInput.files[0];
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = async function(e) {
         const text = e.target.result;
         // Split by newlines, trim, and filter out empty lines
         const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+        
         console.log('Parsed lines from CSV:', lines);
+        console.log('Parsed lines from CSV');
         // For each line, add a new button/icon
         if (buttonConfig && Array.isArray(buttonConfig.buttons)) {
-            lines.forEach(name => {
+            for (const name of lines) {
                 // Avoid duplicates
-                if (buttonConfig.buttons.some(b => b.text === name)) return;
+                if (buttonConfig.buttons.some(b => b.text === name)) continue;
+                const emoji = await getEmojiForWordApi(name);
                 buttonConfig.buttons.push({
                     id: 'icon_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
                     text: name,
-                    image: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='56'>${getEmojiForWord(name)}</text></svg>`
+                    image: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='56'>${emoji}</text></svg>`
                 });
-            });
+            }
             console.log('Updated buttonConfig.buttons:', buttonConfig.buttons);
             // Re-render buttons
-            if (window.createButtons) window.createButtons();
+            if (createButtons) window.createButtons();
         } else {
             console.error('window.buttonConfig or window.buttonConfig.buttons is not available');
         }
@@ -213,9 +179,6 @@ if (typeof window !== 'undefined') {
     });
 }
 
-function createButtons() {
-  // ... your code ...
-}
-window.createButtons = createButtons;
+// window.createButtons = window.createButtons;
 
 export { showStatsDialog, hideStatsDialog };
