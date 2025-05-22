@@ -69,7 +69,14 @@
     <div id="uploadCsvOverlay" class="simple-dialog-overlay"></div>
     <div id="uploadCsvDialog" class="simple-dialog">
         <h2>Upload from CSV</h2>
-        <!-- Additional upload UI will go here -->
+        <div style="margin-top: 24px; display: flex; align-items: center; gap: 12px;">
+            <button id="importCsvButton" class="simple-dialog-button">Import from CSV</button>
+            <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+            <span id="csvFileName" style="font-size: 0.95rem; color: #1a73e8;"></span>
+        </div>
+        <div style="margin-top: 24px; text-align: center;">
+            <button id="submitCsvButton" class="simple-dialog-button primary">Submit</button>
+        </div>
     </div>
     <script src="buttons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

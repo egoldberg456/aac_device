@@ -61,4 +61,5 @@ const buttonConfig = {
             color: "#795548"
         }
     ]
-}; 
+};
+window.buttonConfig = buttonConfig; 

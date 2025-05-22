@@ -168,6 +168,8 @@ function createButtons() {
     });
 }
 
+window.createButtons = createButtons;
+
 // Function to handle text-to-speech
 function speakText(text) {
     // Cancel any ongoing speech
