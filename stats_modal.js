@@ -82,4 +82,28 @@ function drawStatsBarChart(buttonConfig) {
     });
 }
 
+function showUploadCsvDialog() {
+    document.getElementById('uploadCsvDialog').classList.add('active');
+    document.getElementById('uploadCsvOverlay').classList.add('active');
+}
+
+function hideUploadCsvDialog() {
+    document.getElementById('uploadCsvDialog').classList.remove('active');
+    document.getElementById('uploadCsvOverlay').classList.remove('active');
+}
+
+// Attach event listeners for upload button and overlay
+if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+        const uploadBtn = document.getElementById('uploadCsvButton');
+        if (uploadBtn) {
+            uploadBtn.addEventListener('click', showUploadCsvDialog);
+        }
+        const uploadOverlay = document.getElementById('uploadCsvOverlay');
+        if (uploadOverlay) {
+            uploadOverlay.addEventListener('click', hideUploadCsvDialog);
+        }
+    });
+}
+
 export { showStatsDialog, hideStatsDialog }; 

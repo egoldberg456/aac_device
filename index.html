@@ -35,6 +35,13 @@
                 <line x1="6" y1="20" x2="6" y2="14"/>
             </svg>
         </button>
+        <button id="uploadButton" class="dev-button" title="Upload">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+        </button>
     </div>
     <div id="simpleDialogOverlay" class="simple-dialog-overlay"></div>
     <div id="simpleDialog" class="simple-dialog">
@@ -49,10 +56,20 @@
     <div id="statsDialogOverlay" class="simple-dialog-overlay"></div>
     <div id="statsDialog" class="simple-dialog">
         <h2>Stats</h2>
-        <div style="margin-top: 24px;">
-            <h3 style="margin-bottom: 12px;">Daily Stats</h3>
-            <canvas id="statsBarChart" width="400" height="220"></canvas>
+        <div class="stats-flex-row">
+            <div class="stats-chart-panel">
+                <h3 style="margin-bottom: 12px;">Daily Stats</h3>
+                <canvas id="statsBarChart" width="400" height="220"></canvas>
+            </div>
+            <div class="stats-side-panel">
+                <button id="uploadCsvButton" class="simple-dialog-button">Upload</button>
+            </div>
         </div>
+    </div>
+    <div id="uploadCsvOverlay" class="simple-dialog-overlay"></div>
+    <div id="uploadCsvDialog" class="simple-dialog">
+        <h2>Upload from CSV</h2>
+        <!-- Additional upload UI will go here -->
     </div>
     <script src="buttons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
