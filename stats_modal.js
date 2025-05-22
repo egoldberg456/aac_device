@@ -152,17 +152,17 @@ function handleCsvSubmit() {
         const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
         console.log('Parsed lines from CSV:', lines);
         // For each line, add a new button/icon
-        if (window.buttonConfig && Array.isArray(window.buttonConfig.buttons)) {
+        if (buttonConfig && Array.isArray(buttonConfig.buttons)) {
             lines.forEach(name => {
                 // Avoid duplicates
-                if (window.buttonConfig.buttons.some(b => b.text === name)) return;
-                window.buttonConfig.buttons.push({
+                if (buttonConfig.buttons.some(b => b.text === name)) return;
+                buttonConfig.buttons.push({
                     id: 'icon_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
                     text: name,
                     image: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='56'>${getEmojiForWord(name)}</text></svg>`
                 });
             });
-            console.log('Updated buttonConfig.buttons:', window.buttonConfig.buttons);
+            console.log('Updated buttonConfig.buttons:', buttonConfig.buttons);
             // Re-render buttons
             if (window.createButtons) window.createButtons();
         } else {
